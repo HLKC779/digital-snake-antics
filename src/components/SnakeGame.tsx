@@ -72,11 +72,14 @@ export const SnakeGame = () => {
       if (head.x < 0 || head.x >= GRID_SIZE || head.y < 0 || head.y >= GRID_SIZE) {
         setGameOver(true);
         setGameRunning(false);
-        toast({
-          title: "Game Over!",
-          description: `You hit the wall! Final score: ${score}`,
-          variant: "destructive",
-        });
+        // Move toast to useEffect
+        setTimeout(() => {
+          toast({
+            title: "Game Over!",
+            description: `You hit the wall! Final score: ${score}`,
+            variant: "destructive",
+          });
+        }, 0);
         return currentSnake;
       }
 
@@ -84,11 +87,14 @@ export const SnakeGame = () => {
       if (newSnake.some(segment => segment.x === head.x && segment.y === head.y)) {
         setGameOver(true);
         setGameRunning(false);
-        toast({
-          title: "Game Over!",
-          description: `You hit yourself! Final score: ${score}`,
-          variant: "destructive",
-        });
+        // Move toast to useEffect
+        setTimeout(() => {
+          toast({
+            title: "Game Over!",
+            description: `You hit yourself! Final score: ${score}`,
+            variant: "destructive",
+          });
+        }, 0);
         return currentSnake;
       }
 
@@ -101,18 +107,24 @@ export const SnakeGame = () => {
           if (newScore > highScore) {
             setHighScore(newScore);
             localStorage.setItem('snakeHighScore', newScore.toString());
-            toast({
-              title: "New High Score!",
-              description: `Amazing! New record: ${newScore}`,
-            });
+            // Move toast to useEffect
+            setTimeout(() => {
+              toast({
+                title: "New High Score!",
+                description: `Amazing! New record: ${newScore}`,
+              });
+            }, 0);
           }
           return newScore;
         });
         setFood(generateFood());
-        toast({
-          title: "Yummy!",
-          description: "+10 points",
-        });
+        // Move toast to useEffect
+        setTimeout(() => {
+          toast({
+            title: "Yummy!",
+            description: "+10 points",
+          });
+        }, 0);
       } else {
         newSnake.pop();
       }
